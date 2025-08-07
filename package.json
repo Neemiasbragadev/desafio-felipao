@@ -6,6 +6,8 @@
   "main": "start.js",
   "scripts": {
     "start": "node start.js",
+    "web": "node servidor-web.js",
+    "dev": "npm run web",
     "heroi": "node Escolhendo_Heroi.js",
     "rank-xp": "node Rank_Por_XP.js",
     "rank-partidas": "node Rank_Por_Partidas.js",

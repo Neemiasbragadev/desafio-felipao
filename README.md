@@ -19,9 +19,41 @@ desafio-felipao/
 ├── 🎯 SistemaRank_Por_escolha.js  # Sistema completo integrado
 ├── 💳 ValidadorBandeiras.js       # Validador de cartões de crédito
 ├── 📋 numerosTeste.js             # Base de dados de testes
+├── 🌐 servidor-web.js             # Servidor web para interface
 ├── 📄 package.json                # Configurações do projeto
-└── 📚 README files                # Documentação
+├── 📚 README files                # Documentação
+└── 🌐 web/                        # Interface web
+    ├── index.html                 # Página principal
+    ├── css/style.css              # Estilos
+    ├── js/main.js                 # JavaScript
+    └── pages/                     # Páginas adicionais
+        └── validador.html         # Validador interativo
 ```
+
+## 🌐 Interface Web
+
+O projeto agora inclui uma **interface web moderna** além das interações via linha de comando:
+
+### 🎨 Recursos da Interface Web:
+- **Dashboard interativo** com todos os módulos
+- **Validador de cartões online** com interface visual
+- **Documentação integrada** e exemplos de código
+- **Design responsivo** para mobile e desktop
+- **Terminal simulado** com comandos copiáveis
+
+### 🚀 Como Acessar:
+```bash
+npm run web          # Inicia o servidor
+# Acesse: http://localhost:3000
+```
+
+### 📱 Funcionalidades Web:
+- ✅ Visualização de todos os módulos
+- ✅ Validador de cartões interativo
+- ✅ Exemplos de código em tempo real
+- ✅ Documentação navegável
+- ✅ Interface mobile-friendly
+- ✅ **Linha de comando continua funcionando normalmente!**
 
 ## 🎯 Módulos do Sistema
 
@@ -74,7 +106,17 @@ desafio-felipao/
 npm install
 ```
 
-### Execução
+### 🌐 Interface Web (Nova!)
+```bash
+# Iniciar servidor web
+npm run web
+# ou
+npm run dev
+
+# Acesse: http://localhost:3000
+```
+
+### 💻 Linha de Comando (Original)
 
 #### 🎮 Menu Principal (Recomendado)
 ```bash

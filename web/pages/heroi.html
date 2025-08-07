@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦸 Sistema de Heróis - Desafio Felipão</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="../index.html" style="color: white; text-decoration: none;">
+                    🎮 Desafio Felipão
+                </a>
+            </h1>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="#criar" class="nav-link active">Criar Herói</a>
+                <a href="#historico" class="nav-link">Histórico</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="criar" class="validator-container">
+            <div class="validator-card">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">
+                    🦸 Sistema de Criação de Heróis
+                </h2>
+                
+                <form id="heroForm">
+                    <div class="input-group">
+                        <label for="heroName">
+                            <i class="fas fa-user"></i>
+                            Nome do Herói
+                        </label>
+                        <input 
+                            type="text" 
+                            id="heroName" 
+                            placeholder="Digite o nome do herói"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label for="heroAge">
+                            <i class="fas fa-calendar"></i>
+                            Idade do Herói
+                        </label>
+                        <input 
+                            type="number" 
+                            id="heroAge" 
+                            placeholder="Digite a idade"
+                            min="1" 
+                            max="1000"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label for="heroType">
+                            <i class="fas fa-magic"></i>
+                            Tipo do Herói
+                        </label>
+                        <select id="heroType" required>
+                            <option value="">Escolha o tipo do herói</option>
+                            <option value="mago">🧙‍♂️ Mago</option>
+                            <option value="guerreiro">⚔️ Guerreiro</option>
+                            <option value="monge">🥋 Monge</option>
+                            <option value="ninja">🥷 Ninja</option>
+                        </select>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus-circle"></i>
+                            Criar Herói
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearHeroForm()">
+                            <i class="fas fa-trash"></i>
+                            Limpar
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="heroResult" class="result-card">
+                    <div id="heroResultContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="historico" class="validator-container">
+            <div class="validator-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3>📋 Histórico de Heróis</h3>
+                    <button class="btn btn-outline" onclick="clearHistory('heroi')">
+                        <i class="fas fa-trash"></i>
+                        Limpar Histórico
+                    </button>
+                </div>
+                
+                <div id="heroHistory" class="history-container">
+                    <!-- Histórico será inserido aqui -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Tipos de Herói -->
+        <section class="validator-container">
+            <h3 style="text-align: center; color: var(--gray-900); margin-bottom: 2rem;">
+                ⚔️ Tipos de Heróis e Ataques
+            </h3>
+            
+            <div class="brands-grid">
+                <div class="brand-card">
+                    <div class="brand-icon">🧙‍♂️</div>
+                    <h4>Mago</h4>
+                    <p><strong>Ataque:</strong> Magia</p>
+                    <p>Mestres das artes arcanas, usam poder místico para derrotar inimigos.</p>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">⚔️</div>
+                    <h4>Guerreiro</h4>
+                    <p><strong>Ataque:</strong> Espada</p>
+                    <p>Combatentes experientes, especialistas em combate corpo a corpo.</p>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">🥋</div>
+                    <h4>Monge</h4>
+                    <p><strong>Ataque:</strong> Artes Marciais</p>
+                    <p>Disciplinados mestres das artes marciais, usam o próprio corpo como arma.</p>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">🥷</div>
+                    <h4>Ninja</h4>
+                    <p><strong>Ataque:</strong> Shuriken</p>
+                    <p>Assassinos sigilosos, especialistas em ataques furtivos e precisos.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .validator-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .validator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .result-card {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .result-card.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-color);
+        }
+        
+        .result-card.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error-color);
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .brand-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .brand-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-item {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-time {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+    </style>
+
+    <script src="../js/modules.js"></script>
+    <script>
+        document.getElementById('heroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('heroName').value;
+            const idade = document.getElementById('heroAge').value;
+            const tipo = document.getElementById('heroType').value;
+            
+            if (!nome || !idade || !tipo) {
+                showHeroResult('Por favor, preencha todos os campos.', false);
+                return;
+            }
+
+            const resultado = window.desafioFelipao.executarModuloHeroi(nome, idade, tipo);
+            
+            if (resultado.sucesso) {
+                const dados = resultado.resultado;
+                const resultadoHtml = `
+                    <div style="text-align: center;">
+                        <h3>✅ Herói Criado com Sucesso!</h3>
+                        <div style="margin: 1rem 0;">
+                            <div class="hero-card">
+                                <h4>🦸 ${dados.nome}</h4>
+                                <p><strong>Idade:</strong> ${dados.idade} anos</p>
+                                <p><strong>Tipo:</strong> ${dados.tipo.charAt(0).toUpperCase() + dados.tipo.slice(1)}</p>
+                                <p><strong>💥 Ataque:</strong> ${dados.ataque}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                showHeroResult(resultadoHtml, true);
+                updateHeroHistory();
+            } else {
+                showHeroResult(`Erro: ${resultado.erro}`, false);
+            }
+        });
+
+        function showHeroResult(content, success) {
+            const resultDiv = document.getElementById('heroResult');
+            const resultContent = document.getElementById('heroResultContent');
+            
+            resultContent.innerHTML = content;
+            resultDiv.className = `result-card ${success ? 'success' : 'error'}`;
+            resultDiv.style.display = 'block';
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function clearHeroForm() {
+            document.getElementById('heroForm').reset();
+            document.getElementById('heroResult').style.display = 'none';
+        }
+
+        function updateHeroHistory() {
+            const historico = window.desafioFelipao.obterHistorico().filter(item => item.modulo === 'heroi');
+            const historyContainer = document.getElementById('heroHistory');
+            
+            if (historico.length === 0) {
+                historyContainer.innerHTML = '<p style="text-align: center; color: var(--gray-600);">Nenhum herói criado ainda.</p>';
+                return;
+            }
+
+            historyContainer.innerHTML = historico.map(item => `
+                <div class="history-item">
+                    <div class="history-header">
+                        <strong>🦸 ${item.dados.nome}</strong>
+                        <span class="history-time">${item.dados.timestamp}</span>
+                    </div>
+                    <p><strong>Idade:</strong> ${item.dados.idade} anos | <strong>Tipo:</strong> ${item.dados.tipo}</p>
+                    <p><strong>💥 Ataque:</strong> ${item.dados.ataque}</p>
+                </div>
+            `).join('');
+        }
+
+        function clearHistory(modulo) {
+            if (confirm('Tem certeza que deseja limpar o histórico?')) {
+                window.desafioFelipao.limparHistorico();
+                updateHeroHistory();
+                showHeroResult('Histórico limpo com sucesso!', true);
+            }
+        }
+
+        // Carregar histórico ao inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateHeroHistory();
+        });
+
+        // Adicionar CSS para hero-card
+        const additionalCSS = `
+            .hero-card {
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+                padding: 1.5rem;
+                border-radius: 12px;
+                margin: 1rem 0;
+            }
+            
+            .hero-card h4 {
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
+            
+            .hero-card p {
+                margin-bottom: 0.5rem;
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalCSS;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>

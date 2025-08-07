@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Desafio Felipão - Sistemas Interativos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🎮 Desafio Felipão</h1>
+            <nav class="nav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#modules" class="nav-link">Módulos</a>
+                <a href="#docs" class="nav-link">Documentação</a>
+                <a href="#terminal" class="nav-link">Terminal</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">Coleção de Sistemas Interativos</h2>
+                    <p class="hero-description">
+                        Uma demonstração completa de conceitos de programação em Node.js, 
+                        desde criação de classes até validação avançada de dados.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Módulos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">11</span>
+                            <span class="stat-label">Bandeiras de Cartão</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="scrollToSection('modules')">
+                            <i class="fas fa-play"></i> Explorar Módulos
+                        </button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('terminal')">
+                            <i class="fas fa-terminal"></i> Acessar Terminal
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="code-preview">
+                        <div class="code-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="filename">start.js</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code>import ler from 'readline-sync';
+
+console.log('🎮 DESAFIO FELIPÃO 🎮');
+
+const opcoes = [
+    'Escolhendo Herói',
+    'Rank por XP', 
+    'Validador de Bandeiras'
+];
+
+// Execute: npm start</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modules Section -->
+        <section id="modules" class="modules">
+            <div class="container">
+                <h2 class="section-title">🎯 Módulos do Sistema</h2>
+                <div class="modules-grid">
+                    
+                    <!-- Módulo 1: Heróis -->
+                    <div class="module-card" data-module="heroi">
+                        <div class="module-icon">🦸</div>
+                        <h3 class="module-title">Sistema de Heróis</h3>
+                        <p class="module-description">
+                            Criação de heróis com classes, tipos e sistema de ataques.
+                        </p>
+                        <div class="module-tech">
+                            <span class="tech-tag">Classes</span>
+                            <span class="tech-tag">OOP</span>
+                            <span class="tech-tag">Switch Case</span>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-outline" onclick="openModuleDetails('heroi')">
+                                <i class="fas fa-info-circle"></i> Detalhes
+                            </button>
+                            <button class="btn btn-primary" onclick="runModule('heroi')">
+                                <i class="fas fa-play"></i> Executar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 2: Rank XP -->
+                                            <div class="module-card" onclick="window.location.href='pages/rank-xp.html'">
+                            <div class="module-icon">⭐</div>
+                            <h3>Ranking por XP</h3>
+                            <p>Sistema de classificação baseado em experiência (XP) do herói</p>
+                            <div class="module-stats">
+                                <span>8 níveis disponíveis</span>
+                            </div>
+                        </div>
+
+                        <div class="module-card" onclick="window.location.href='pages/rank-partidas.html'">
+                            <div class="module-icon">🏆</div>
+                            <h3>Ranking por Partidas</h3>
+                            <p>Sistema de classificação baseado em vitórias e derrotas</p>
+                            <div class="module-stats">
+                                <span>7 níveis disponíveis</span>
+                            </div>
+                        </div>
+
+                        <div class="module-card" onclick="window.location.href='pages/sistema-completo.html'">
+                            <div class="module-icon">🎮</div>
+                            <h3>Sistema Integrado</h3>
+                            <p>Todos os módulos em uma interface única e completa</p>
+                            <div class="module-stats">
+                                <span>Interface all-in-one</span>
+                            </div>
+                        </div>
+
+                    <!-- Módulo 3: Rank Partidas -->
+                    <div class="module-card" data-module="rank-partidas">
+                        <div class="module-icon">🏆</div>
+                        <h3 class="module-title">Ranking por Partidas</h3>
+                        <p class="module-description">
+                            Classificação baseada em vitórias, derrotas e saldo.
+                        </p>
+                        <div class="module-tech">
+                            <span class="tech-tag">Matemática</span>
+                            <span class="tech-tag">Cálculos</span>
+                            <span class="tech-tag">Rankings</span>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-outline" onclick="openModuleDetails('rank-partidas')">
+                                <i class="fas fa-info-circle"></i> Detalhes
+                            </button>
+                            <button class="btn btn-primary" onclick="runModule('rank-partidas')">
+                                <i class="fas fa-play"></i> Executar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 4: Sistema Completo -->
+                    <div class="module-card" data-module="sistema-completo">
+                        <div class="module-icon">🎯</div>
+                        <h3 class="module-title">Sistema Completo</h3>
+                        <p class="module-description">
+                            Integração de múltiplas funcionalidades em um sistema único.
+                        </p>
+                        <div class="module-tech">
+                            <span class="tech-tag">Integração</span>
+                            <span class="tech-tag">Loops</span>
+                            <span class="tech-tag">Validação</span>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-outline" onclick="openModuleDetails('sistema-completo')">
+                                <i class="fas fa-info-circle"></i> Detalhes
+                            </button>
+                            <button class="btn btn-primary" onclick="runModule('sistema-completo')">
+                                <i class="fas fa-play"></i> Executar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Módulo 5: Validador -->
+                    <div class="module-card featured" data-module="validador">
+                        <div class="module-icon">💳</div>
+                        <h3 class="module-title">Validador de Bandeiras</h3>
+                        <p class="module-description">
+                            Validação avançada de cartões com algoritmo de Luhn e 11 bandeiras.
+                        </p>
+                        <div class="module-tech">
+                            <span class="tech-tag">Algoritmos</span>
+                            <span class="tech-tag">Regex</span>
+                            <span class="tech-tag">Segurança</span>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-outline" onclick="openModuleDetails('validador')">
+                                <i class="fas fa-info-circle"></i> Detalhes
+                            </button>
+                            <button class="btn btn-primary" onclick="runModule('validador')">
+                                <i class="fas fa-play"></i> Executar
+                            </button>
+                        </div>
+                        <div class="featured-badge">Destaque</div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation Section -->
+        <section id="docs" class="docs">
+            <div class="container">
+                <h2 class="section-title">📚 Documentação</h2>
+                <div class="docs-grid">
+                    <div class="doc-card">
+                        <div class="doc-icon">🚀</div>
+                        <h3>Guia de Instalação</h3>
+                        <p>Como configurar e executar o projeto em sua máquina.</p>
+                        <div class="code-snippet">
+                            <code>npm install && npm start</code>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-icon">🛠️</div>
+                        <h3>Tecnologias</h3>
+                        <p>Node.js, ES6 Modules, readline-sync, Regex, Algoritmos.</p>
+                        <div class="tech-list">
+                            <span class="tech-item">Node.js</span>
+                            <span class="tech-item">JavaScript ES6+</span>
+                            <span class="tech-item">Algoritmo de Luhn</span>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-icon">🎓</div>
+                        <h3>Conceitos Demonstrados</h3>
+                        <p>OOP, validação de dados, algoritmos, interface interativa.</p>
+                        <ul class="concept-list">
+                            <li>Programação Orientada a Objetos</li>
+                            <li>Estruturas de Controle</li>
+                            <li>Validação e Segurança</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terminal Section -->
+        <section id="terminal" class="terminal-section">
+            <div class="container">
+                <h2 class="section-title">💻 Terminal Interativo</h2>
+                <div class="terminal-container">
+                    <div class="terminal-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                        <span class="terminal-title">desafio-felipao@localhost</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-content" id="terminalContent">
+                            <div class="terminal-line">
+                                <span class="prompt">$</span>
+                                <span class="command">cd /var/www/html/desafio-felipao</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="prompt">$</span>
+                                <span class="command">npm start</span>
+                            </div>
+                            <div class="terminal-output">
+                                <div class="output-line">🎮 DESAFIO FELIPÃO - ESCOLHA SUA AVENTURA 🎮</div>
+                                <div class="output-line">==================================================</div>
+                                <div class="output-line">1. Escolhendo Herói</div>
+                                <div class="output-line">2. Rank por XP</div>
+                                <div class="output-line">3. Rank por Partidas</div>
+                                <div class="output-line">4. Sistema Completo</div>
+                                <div class="output-line">5. Validador de Bandeiras</div>
+                                <div class="output-line cursor">Digite sua escolha (1-5): _</div>
+                            </div>
+                        </div>
+                        <div class="terminal-commands">
+                            <h4>Comandos Disponíveis:</h4>
+                            <div class="command-grid">
+                                <div class="command-item" onclick="copyCommand('npm start')">
+                                    <code>npm start</code>
+                                    <span class="command-desc">Menu principal</span>
+                                </div>
+                                <div class="command-item" onclick="copyCommand('npm run heroi')">
+                                    <code>npm run heroi</code>
+                                    <span class="command-desc">Sistema de heróis</span>
+                                </div>
+                                <div class="command-item" onclick="copyCommand('npm run validador')">
+                                    <code>npm run validador</code>
+                                    <span class="command-desc">Validador de cartões</span>
+                                </div>
+                                <div class="command-item" onclick="copyCommand('npm run rank-xp')">
+                                    <code>npm run rank-xp</code>
+                                    <span class="command-desc">Ranking por XP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para detalhes dos módulos -->
+    <div id="moduleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Conteúdo será inserido dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>🎮 Desafio Felipão</h4>
+                    <p>Desenvolvido como parte dos desafios de programação Felipão</p>
+                </div>
+                <div class="footer-links">
+                    <a href="https://github.com/Neemiasbragadev/desafio-felipao" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="#docs">
+                        <i class="fas fa-book"></i> Documentação
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

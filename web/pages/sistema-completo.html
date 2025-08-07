@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Sistema Completo - Desafio Felipão</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="../index.html" style="color: white; text-decoration: none;">
+                    🎮 Desafio Felipão
+                </a>
+            </h1>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="#sistema" class="nav-link active">Sistema</a>
+                <a href="#heroi" class="nav-link">Herói</a>
+                <a href="#ranking" class="nav-link">Ranking</a>
+                <a href="#historico" class="nav-link">Histórico</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="sistema" class="validator-container">
+            <div class="validator-card">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">
+                    🎮 Sistema Integrado - Desafio Felipão
+                </h2>
+                
+                <div class="module-selector">
+                    <div class="module-tabs">
+                        <button class="tab-btn active" onclick="switchModule('heroi')">
+                            <i class="fas fa-user-plus"></i>
+                            Criar Herói
+                        </button>
+                        <button class="tab-btn" onclick="switchModule('rank-xp')">
+                            <i class="fas fa-star"></i>
+                            Rank por XP
+                        </button>
+                        <button class="tab-btn" onclick="switchModule('rank-partidas')">
+                            <i class="fas fa-trophy"></i>
+                            Rank por Partidas
+                        </button>
+                        <button class="tab-btn" onclick="switchModule('validador')">
+                            <i class="fas fa-credit-card"></i>
+                            Validar Cartão
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Módulo Herói -->
+                <div id="module-heroi" class="module-content active">
+                    <h3><i class="fas fa-user-plus"></i> Criação de Herói</h3>
+                    <form id="heroiFormCompleto">
+                        <div class="input-group">
+                            <label for="heroiNome">
+                                <i class="fas fa-user"></i>
+                                Nome do Herói
+                            </label>
+                            <input 
+                                type="text" 
+                                id="heroiNome" 
+                                placeholder="Digite o nome do seu herói"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="heroiIdade">
+                                <i class="fas fa-calendar"></i>
+                                Idade
+                            </label>
+                            <input 
+                                type="number" 
+                                id="heroiIdade" 
+                                placeholder="Idade do herói"
+                                min="1" 
+                                max="999"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="heroiTipo">
+                                <i class="fas fa-magic"></i>
+                                Tipo de Herói
+                            </label>
+                            <select id="heroiTipo" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="mago">🧙‍♂️ Mago</option>
+                                <option value="guerreiro">⚔️ Guerreiro</option>
+                                <option value="monge">🥋 Monge</option>
+                                <option value="ninja">🥷 Ninja</option>
+                            </select>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus"></i>
+                                Criar Herói
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Módulo Rank XP -->
+                <div id="module-rank-xp" class="module-content">
+                    <h3><i class="fas fa-star"></i> Classificação por XP</h3>
+                    <form id="xpFormCompleto">
+                        <div class="input-group">
+                            <label for="xpHeroiNome">
+                                <i class="fas fa-user"></i>
+                                Nome do Herói
+                            </label>
+                            <input 
+                                type="text" 
+                                id="xpHeroiNome" 
+                                placeholder="Nome do herói"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="xpQuantidade">
+                                <i class="fas fa-star"></i>
+                                Experiência (XP)
+                            </label>
+                            <input 
+                                type="number" 
+                                id="xpQuantidade" 
+                                placeholder="Quantidade de XP"
+                                min="0" 
+                                max="99999"
+                                required
+                            >
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-calculator"></i>
+                                Calcular Nível
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Módulo Rank Partidas -->
+                <div id="module-rank-partidas" class="module-content">
+                    <h3><i class="fas fa-trophy"></i> Classificação por Partidas</h3>
+                    <form id="partidasFormCompleto">
+                        <div class="input-group">
+                            <label for="partidasHeroiNome">
+                                <i class="fas fa-user"></i>
+                                Nome do Herói
+                            </label>
+                            <input 
+                                type="text" 
+                                id="partidasHeroiNome" 
+                                placeholder="Nome do herói"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="partidasVitorias">
+                                    <i class="fas fa-trophy"></i>
+                                    Vitórias
+                                </label>
+                                <input 
+                                    type="number" 
+                                    id="partidasVitorias" 
+                                    placeholder="Número de vitórias"
+                                    min="0" 
+                                    max="9999"
+                                    required
+                                >
+                            </div>
+
+                            <div class="input-group">
+                                <label for="partidasDerrotas">
+                                    <i class="fas fa-times-circle"></i>
+                                    Derrotas
+                                </label>
+                                <input 
+                                    type="number" 
+                                    id="partidasDerrotas" 
+                                    placeholder="Número de derrotas"
+                                    min="0" 
+                                    max="9999"
+                                    required
+                                >
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-calculator"></i>
+                                Calcular Ranking
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Módulo Validador -->
+                <div id="module-validador" class="module-content">
+                    <h3><i class="fas fa-credit-card"></i> Validador de Cartão</h3>
+                    <form id="validadorFormCompleto">
+                        <div class="input-group">
+                            <label for="validadorNumero">
+                                <i class="fas fa-credit-card"></i>
+                                Número do Cartão
+                            </label>
+                            <input 
+                                type="text" 
+                                id="validadorNumero" 
+                                placeholder="0000 0000 0000 0000"
+                                maxlength="19"
+                                required
+                            >
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-check-circle"></i>
+                                Validar Cartão
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Área de Resultado -->
+                <div id="resultadoCompleto" class="result-card">
+                    <div id="resultadoCompletoContent"></div>
+                </div>
+
+                <!-- Botões de Limpeza -->
+                <div class="action-buttons">
+                    <button class="btn btn-outline" onclick="clearCurrentModule()">
+                        <i class="fas fa-eraser"></i>
+                        Limpar Módulo
+                    </button>
+                    <button class="btn btn-outline" onclick="clearAllModules()">
+                        <i class="fas fa-trash"></i>
+                        Limpar Tudo
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="heroi" class="validator-container">
+            <div class="validator-card">
+                <h3>🦸‍♂️ Heróis Criados</h3>
+                <div id="heroisCriados" class="heroes-grid">
+                    <!-- Heróis serão inseridos aqui -->
+                </div>
+            </div>
+        </section>
+
+        <section id="ranking" class="validator-container">
+            <div class="validator-card">
+                <h3>🏆 Rankings Calculados</h3>
+                <div id="rankingsCalculados" class="rankings-grid">
+                    <!-- Rankings serão inseridos aqui -->
+                </div>
+            </div>
+        </section>
+
+        <section id="historico" class="validator-container">
+            <div class="validator-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3>📋 Histórico Completo</h3>
+                    <button class="btn btn-outline" onclick="clearHistory('todos')">
+                        <i class="fas fa-trash"></i>
+                        Limpar Histórico
+                    </button>
+                </div>
+                
+                <div id="historicoCompleto" class="history-container">
+                    <!-- Histórico será inserido aqui -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .validator-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .validator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .module-selector {
+            margin-bottom: 2rem;
+        }
+
+        .module-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            background: var(--gray-100);
+            padding: 0.5rem;
+            border-radius: 12px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .module-content {
+            display: none;
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 1rem;
+        }
+
+        .module-content.active {
+            display: block;
+        }
+
+        .module-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray-200);
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+            .module-tabs {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .result-card {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .result-card.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-color);
+        }
+        
+        .result-card.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .heroes-grid, .rankings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .hero-card, .ranking-card {
+            background: var(--gray-50);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .hero-card h4, .ranking-card h4 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            margin-left: 0.5rem;
+        }
+
+        .mago { background: #8b5cf6; }
+        .guerreiro { background: #ef4444; }
+        .monge { background: #f59e0b; }
+        .ninja { background: #1f2937; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .history-container {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-time {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .module-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: white;
+            margin-right: 0.5rem;
+        }
+
+        .badge-heroi { background: #8b5cf6; }
+        .badge-rank-xp { background: #f59e0b; }
+        .badge-rank-partidas { background: #10b981; }
+        .badge-validador { background: #3b82f6; }
+
+        /* Animações */
+        .module-content {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Formatação do número do cartão */
+        .card-number {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+    </style>
+
+    <script src="../js/modules.js"></script>
+    <script>
+        let currentModule = 'heroi';
+
+        function switchModule(module) {
+            // Atualizar botões
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`[onclick="switchModule('${module}')"]`).classList.add('active');
+            
+            // Atualizar conteúdo
+            document.querySelectorAll('.module-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`module-${module}`).classList.add('active');
+            
+            currentModule = module;
+            
+            // Limpar resultado anterior
+            document.getElementById('resultadoCompleto').style.display = 'none';
+        }
+
+        // Formulário de Herói
+        document.getElementById('heroiFormCompleto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('heroiNome').value;
+            const idade = document.getElementById('heroiIdade').value;
+            const tipo = document.getElementById('heroiTipo').value;
+            
+            if (!nome || !idade || !tipo) {
+                showResult('Por favor, preencha todos os campos.', false);
+                return;
+            }
+
+            const resultado = window.desafioFelipao.executarModuloHeroi(nome, idade, tipo);
+            
+            if (resultado.sucesso) {
+                const dados = resultado.resultado;
+                const resultadoHtml = `
+                    <div style="text-align: center;">
+                        <h3>🎉 Herói Criado com Sucesso!</h3>
+                        <div class="hero-result">
+                            <h4>🦸‍♂️ ${dados.nome}</h4>
+                            <p><strong>Idade:</strong> ${dados.idade} anos</p>
+                            <p><strong>Tipo:</strong> <span class="hero-badge ${dados.tipo}">${dados.tipoFormatado}</span></p>
+                            <p style="margin-top: 1rem; font-style: italic; color: var(--gray-600);">
+                                ${dados.descricao}
+                            </p>
+                        </div>
+                    </div>
+                `;
+                showResult(resultadoHtml, true);
+                updateDisplays();
+            } else {
+                showResult(`Erro: ${resultado.erro}`, false);
+            }
+        });
+
+        // Formulário de XP
+        document.getElementById('xpFormCompleto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('xpHeroiNome').value;
+            const xp = document.getElementById('xpQuantidade').value;
+            
+            if (!nome || !xp) {
+                showResult('Por favor, preencha todos os campos.', false);
+                return;
+            }
+
+            const resultado = window.desafioFelipao.executarModuloRankXP(nome, xp);
+            
+            if (resultado.sucesso) {
+                const dados = resultado.resultado;
+                const nextLevelInfo = getNextLevelInfoXP(dados.xp, dados.nivel);
+                
+                const resultadoHtml = `
+                    <div style="text-align: center;">
+                        <h3>⭐ Nível Calculado!</h3>
+                        <div class="xp-result">
+                            <h4>🌟 ${dados.nome}</h4>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-number" style="color: var(--primary-color);">${dados.xp}</span>
+                                    <span class="stat-label">XP</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" style="color: var(--success-color);">${dados.nivel}</span>
+                                    <span class="stat-label">Nível</span>
+                                </div>
+                            </div>
+                            ${nextLevelInfo}
+                        </div>
+                    </div>
+                `;
+                showResult(resultadoHtml, true);
+                updateDisplays();
+            } else {
+                showResult(`Erro: ${resultado.erro}`, false);
+            }
+        });
+
+        // Formulário de Partidas
+        document.getElementById('partidasFormCompleto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('partidasHeroiNome').value;
+            const vitorias = document.getElementById('partidasVitorias').value;
+            const derrotas = document.getElementById('partidasDerrotas').value;
+            
+            if (!nome || !vitorias || !derrotas) {
+                showResult('Por favor, preencha todos os campos.', false);
+                return;
+            }
+
+            const resultado = window.desafioFelipao.executarModuloRankPartidas(nome, vitorias, derrotas);
+            
+            if (resultado.sucesso) {
+                const dados = resultado.resultado;
+                const winRate = ((dados.vitorias / (dados.vitorias + dados.derrotas)) * 100).toFixed(1);
+                const saldoClass = dados.saldo > 0 ? 'saldo-positivo' : dados.saldo < 0 ? 'saldo-negativo' : 'saldo-neutro';
+                
+                const resultadoHtml = `
+                    <div style="text-align: center;">
+                        <h3>🏆 Ranking Calculado!</h3>
+                        <div class="partidas-result">
+                            <h4>🥇 ${dados.nome}</h4>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-number" style="color: var(--success-color);">${dados.vitorias}</span>
+                                    <span class="stat-label">Vitórias</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" style="color: var(--error-color);">${dados.derrotas}</span>
+                                    <span class="stat-label">Derrotas</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number ${saldoClass}">${dados.saldo >= 0 ? '+' : ''}${dados.saldo}</span>
+                                    <span class="stat-label">Saldo</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">${winRate}%</span>
+                                    <span class="stat-label">Taxa</span>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem;">
+                                <strong>Nível:</strong> <span class="rank-badge rank-${dados.nivel.toLowerCase()}">${dados.nivel}</span>
+                            </p>
+                        </div>
+                    </div>
+                `;
+                showResult(resultadoHtml, true);
+                updateDisplays();
+            } else {
+                showResult(`Erro: ${resultado.erro}`, false);
+            }
+        });
+
+        // Formulário de Validador
+        document.getElementById('validadorFormCompleto').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const numero = document.getElementById('validadorNumero').value;
+            
+            if (!numero) {
+                showResult('Por favor, digite o número do cartão.', false);
+                return;
+            }
+
+            const resultado = window.desafioFelipao.executarModuloValidador(numero);
+            
+            if (resultado.sucesso) {
+                const dados = resultado.resultado;
+                const resultadoHtml = `
+                    <div style="text-align: center;">
+                        <h3>${dados.valido ? '✅ Cartão Válido!' : '❌ Cartão Inválido!'}</h3>
+                        <div class="validador-result">
+                            <p><strong>Número:</strong> <span class="card-number">${dados.numeroFormatado}</span></p>
+                            <p><strong>Bandeira:</strong> ${dados.bandeira}</p>
+                            <p><strong>Algoritmo de Luhn:</strong> ${dados.luhnValido ? '✅ Válido' : '❌ Inválido'}</p>
+                            ${dados.detalhes ? `<p style="color: var(--gray-600); font-size: 0.9rem; margin-top: 1rem;">${dados.detalhes}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+                showResult(resultadoHtml, dados.valido);
+                updateDisplays();
+            } else {
+                showResult(`Erro: ${resultado.erro}`, false);
+            }
+        });
+
+        // Formatação automática do número do cartão
+        document.getElementById('validadorNumero').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        function showResult(content, success) {
+            const resultDiv = document.getElementById('resultadoCompleto');
+            const resultContent = document.getElementById('resultadoCompletoContent');
+            
+            resultContent.innerHTML = content;
+            resultDiv.className = `result-card ${success ? 'success' : 'error'}`;
+            resultDiv.style.display = 'block';
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function clearCurrentModule() {
+            const forms = {
+                'heroi': 'heroiFormCompleto',
+                'rank-xp': 'xpFormCompleto',
+                'rank-partidas': 'partidasFormCompleto',
+                'validador': 'validadorFormCompleto'
+            };
+            
+            if (forms[currentModule]) {
+                document.getElementById(forms[currentModule]).reset();
+            }
+            
+            document.getElementById('resultadoCompleto').style.display = 'none';
+        }
+
+        function clearAllModules() {
+            if (confirm('Tem certeza que deseja limpar todos os módulos?')) {
+                document.getElementById('heroiFormCompleto').reset();
+                document.getElementById('xpFormCompleto').reset();
+                document.getElementById('partidasFormCompleto').reset();
+                document.getElementById('validadorFormCompleto').reset();
+                document.getElementById('resultadoCompleto').style.display = 'none';
+                showResult('Todos os módulos foram limpos!', true);
+            }
+        }
+
+        function getNextLevelInfoXP(xp, nivelAtual) {
+            const niveis = [
+                { nome: 'Ferro', min: 0, max: 1000 },
+                { nome: 'Bronze', min: 1001, max: 2000 },
+                { nome: 'Prata', min: 2001, max: 5000 },
+                { nome: 'Ouro', min: 5001, max: 7000 },
+                { nome: 'Platina', min: 7001, max: 8000 },
+                { nome: 'Ascendente', min: 8001, max: 9000 },
+                { nome: 'Imortal', min: 9001, max: 10000 },
+                { nome: 'Radiante', min: 10001, max: 99999 }
+            ];
+
+            const nivelIndex = niveis.findIndex(n => n.nome === nivelAtual);
+            
+            if (nivelIndex === -1 || nivelIndex === niveis.length - 1) {
+                return '<p style="color: var(--success-color); margin-top: 1rem;">🌟 Nível máximo alcançado!</p>';
+            }
+
+            const proximoNivel = niveis[nivelIndex + 1];
+            const xpNecessario = proximoNivel.min - xp;
+
+            if (xpNecessario > 0) {
+                return `
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.3);">
+                        <p style="font-size: 0.9rem;">
+                            🎯 Faltam <strong>${xpNecessario}</strong> XP para alcançar <strong>${proximoNivel.nome}</strong>
+                        </p>
+                    </div>
+                `;
+            }
+
+            return '';
+        }
+
+        function updateDisplays() {
+            updateHeroisCriados();
+            updateRankingsCalculados();
+            updateHistoricoCompleto();
+        }
+
+        function updateHeroisCriados() {
+            const herois = window.desafioFelipao.obterHistorico().filter(item => item.modulo === 'heroi');
+            const container = document.getElementById('heroisCriados');
+            
+            if (herois.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray-600);">Nenhum herói criado ainda.</p>';
+                return;
+            }
+
+            container.innerHTML = herois.map(item => `
+                <div class="hero-card">
+                    <h4>🦸‍♂️ ${item.dados.nome}</h4>
+                    <p><strong>Idade:</strong> ${item.dados.idade} anos</p>
+                    <p><strong>Tipo:</strong> <span class="hero-badge ${item.dados.tipo}">${item.dados.tipoFormatado}</span></p>
+                    <p style="font-size: 0.9rem; color: var(--gray-600);">${item.dados.timestamp}</p>
+                </div>
+            `).join('');
+        }
+
+        function updateRankingsCalculados() {
+            const rankings = window.desafioFelipao.obterHistorico().filter(item => 
+                item.modulo === 'rank-xp' || item.modulo === 'rank-partidas'
+            );
+            const container = document.getElementById('rankingsCalculados');
+            
+            if (rankings.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray-600);">Nenhum ranking calculado ainda.</p>';
+                return;
+            }
+
+            container.innerHTML = rankings.map(item => {
+                if (item.modulo === 'rank-xp') {
+                    return `
+                        <div class="ranking-card">
+                            <h4>⭐ ${item.dados.nome}</h4>
+                            <p><strong>XP:</strong> ${item.dados.xp}</p>
+                            <p><strong>Nível:</strong> ${item.dados.nivel}</p>
+                            <p style="font-size: 0.9rem; color: var(--gray-600);">${item.dados.timestamp}</p>
+                        </div>
+                    `;
+                } else {
+                    const winRate = ((item.dados.vitorias / (item.dados.vitorias + item.dados.derrotas)) * 100).toFixed(1);
+                    return `
+                        <div class="ranking-card">
+                            <h4>🏆 ${item.dados.nome}</h4>
+                            <p><strong>V/D:</strong> ${item.dados.vitorias}/${item.dados.derrotas} (${winRate}%)</p>
+                            <p><strong>Saldo:</strong> ${item.dados.saldo >= 0 ? '+' : ''}${item.dados.saldo}</p>
+                            <p><strong>Nível:</strong> ${item.dados.nivel}</p>
+                            <p style="font-size: 0.9rem; color: var(--gray-600);">${item.dados.timestamp}</p>
+                        </div>
+                    `;
+                }
+            }).join('');
+        }
+
+        function updateHistoricoCompleto() {
+            const historico = window.desafioFelipao.obterHistorico();
+            const container = document.getElementById('historicoCompleto');
+            
+            if (historico.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--gray-600);">Nenhuma ação realizada ainda.</p>';
+                return;
+            }
+
+            container.innerHTML = historico.map(item => {
+                const moduleNames = {
+                    'heroi': 'Herói',
+                    'rank-xp': 'Rank XP',
+                    'rank-partidas': 'Rank Partidas',
+                    'validador': 'Validador'
+                };
+
+                return `
+                    <div class="history-item">
+                        <div class="history-header">
+                            <div>
+                                <span class="module-badge badge-${item.modulo}">${moduleNames[item.modulo]}</span>
+                                <strong>${getHistoryTitle(item)}</strong>
+                            </div>
+                            <span class="history-time">${item.dados.timestamp}</span>
+                        </div>
+                        <p>${getHistoryDescription(item)}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getHistoryTitle(item) {
+            switch (item.modulo) {
+                case 'heroi':
+                    return `🦸‍♂️ ${item.dados.nome}`;
+                case 'rank-xp':
+                    return `⭐ ${item.dados.nome} - ${item.dados.nivel}`;
+                case 'rank-partidas':
+                    return `🏆 ${item.dados.nome} - ${item.dados.nivel}`;
+                case 'validador':
+                    return `💳 ${item.dados.bandeira}`;
+                default:
+                    return 'Ação';
+            }
+        }
+
+        function getHistoryDescription(item) {
+            switch (item.modulo) {
+                case 'heroi':
+                    return `${item.dados.tipoFormatado}, ${item.dados.idade} anos`;
+                case 'rank-xp':
+                    return `${item.dados.xp} XP`;
+                case 'rank-partidas':
+                    const winRate = ((item.dados.vitorias / (item.dados.vitorias + item.dados.derrotas)) * 100).toFixed(1);
+                    return `${item.dados.vitorias}V/${item.dados.derrotas}D (${winRate}%) - Saldo: ${item.dados.saldo >= 0 ? '+' : ''}${item.dados.saldo}`;
+                case 'validador':
+                    return `${item.dados.numeroFormatado} - ${item.dados.valido ? 'Válido' : 'Inválido'}`;
+                default:
+                    return '';
+            }
+        }
+
+        function clearHistory(tipo) {
+            if (confirm('Tem certeza que deseja limpar o histórico?')) {
+                window.desafioFelipao.limparHistorico();
+                updateDisplays();
+                showResult('Histórico limpo com sucesso!', true);
+            }
+        }
+
+        // Carregar dados ao inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDisplays();
+        });
+
+        // CSS adicional para resultados
+        const additionalCSS = `
+            .hero-result, .xp-result, .partidas-result, .validador-result {
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+                padding: 2rem;
+                border-radius: 12px;
+                margin: 1rem 0;
+            }
+            
+            .hero-result h4, .xp-result h4, .partidas-result h4, .validador-result h4 {
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
+
+            .rank-badge {
+                display: inline-block;
+                padding: 0.25rem 0.75rem;
+                border-radius: 20px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: white;
+                margin-left: 0.5rem;
+            }
+
+            .rank-ferro { background: #94a3b8; }
+            .rank-bronze { background: #cd7f32; }
+            .rank-prata { background: #c0c0c0; color: #333; }
+            .rank-ouro { background: #ffd700; color: #333; }
+            .rank-diamante { background: #b9f2ff; color: #333; }
+            .rank-platina { background: #e5e7eb; color: #333; }
+            .rank-ascendente { background: #06b6d4; }
+            .rank-imortal { background: #9b59b6; }
+            .rank-lendário { background: #ff6b6b; }
+            .rank-radiante { background: #f59e0b; }
+
+            .saldo-positivo { color: var(--success-color); }
+            .saldo-negativo { color: var(--error-color); }
+            .saldo-neutro { color: var(--gray-600); }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalCSS;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>
