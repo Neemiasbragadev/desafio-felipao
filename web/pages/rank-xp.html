@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Ranking por XP - Desafio Felipão</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="../index.html" style="color: white; text-decoration: none;">
+                    🎮 Desafio Felipão
+                </a>
+            </h1>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="#ranking" class="nav-link active">Classificar</a>
+                <a href="#niveis" class="nav-link">Níveis</a>
+                <a href="#historico" class="nav-link">Histórico</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="ranking" class="validator-container">
+            <div class="validator-card">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">
+                    📊 Sistema de Ranking por XP
+                </h2>
+                
+                <form id="xpForm">
+                    <div class="input-group">
+                        <label for="heroName">
+                            <i class="fas fa-user"></i>
+                            Nome do Herói
+                        </label>
+                        <input 
+                            type="text" 
+                            id="heroName" 
+                            placeholder="Digite o nome do herói"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label for="heroXP">
+                            <i class="fas fa-star"></i>
+                            Pontos de Experiência (XP)
+                        </label>
+                        <input 
+                            type="number" 
+                            id="heroXP" 
+                            placeholder="Digite a quantidade de XP"
+                            min="0" 
+                            max="999999"
+                            required
+                        >
+                        <small style="color: var(--gray-600); font-size: 0.9rem;">
+                            💡 Dica: Teste valores como 500, 1500, 3000, 6000, 8500, 10500
+                        </small>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-trophy"></i>
+                            Classificar Herói
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearXPForm()">
+                            <i class="fas fa-trash"></i>
+                            Limpar
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="xpResult" class="result-card">
+                    <div id="xpResultContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="niveis" class="validator-container">
+            <h3 style="text-align: center; color: var(--gray-900); margin-bottom: 2rem;">
+                🏆 Níveis de Classificação por XP
+            </h3>
+            
+            <div class="levels-container">
+                <div class="level-card ferro">
+                    <div class="level-icon">⚡</div>
+                    <h4>Ferro</h4>
+                    <p class="level-range">0 - 1.000 XP</p>
+                    <p>Iniciante na jornada</p>
+                    <button onclick="testLevel(500)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card bronze">
+                    <div class="level-icon">🥉</div>
+                    <h4>Bronze</h4>
+                    <p class="level-range">1.001 - 2.000 XP</p>
+                    <p>Aprendendo os fundamentos</p>
+                    <button onclick="testLevel(1500)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card prata">
+                    <div class="level-icon">🥈</div>
+                    <h4>Prata</h4>
+                    <p class="level-range">2.001 - 5.000 XP</p>
+                    <p>Desenvolvendo habilidades</p>
+                    <button onclick="testLevel(3500)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card ouro">
+                    <div class="level-icon">🥇</div>
+                    <h4>Ouro</h4>
+                    <p class="level-range">5.001 - 7.000 XP</p>
+                    <p>Herói competente</p>
+                    <button onclick="testLevel(6000)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card platina">
+                    <div class="level-icon">💎</div>
+                    <h4>Platina</h4>
+                    <p class="level-range">7.001 - 8.000 XP</p>
+                    <p>Herói experiente</p>
+                    <button onclick="testLevel(7500)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card ascendente">
+                    <div class="level-icon">⭐</div>
+                    <h4>Ascendente</h4>
+                    <p class="level-range">8.001 - 9.000 XP</p>
+                    <p>Quase um mestre</p>
+                    <button onclick="testLevel(8500)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card imortal">
+                    <div class="level-icon">🌟</div>
+                    <h4>Imortal</h4>
+                    <p class="level-range">9.001 - 10.000 XP</p>
+                    <p>Herói lendário</p>
+                    <button onclick="testLevel(9500)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card radiante">
+                    <div class="level-icon">✨</div>
+                    <h4>Radiante</h4>
+                    <p class="level-range">10.001+ XP</p>
+                    <p>O mais alto nível</p>
+                    <button onclick="testLevel(15000)" class="btn-test">Testar</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="historico" class="validator-container">
+            <div class="validator-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3>📋 Histórico de Rankings XP</h3>
+                    <button class="btn btn-outline" onclick="clearHistory('rank-xp')">
+                        <i class="fas fa-trash"></i>
+                        Limpar Histórico
+                    </button>
+                </div>
+                
+                <div id="xpHistory" class="history-container">
+                    <!-- Histórico será inserido aqui -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .validator-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .validator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .result-card {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .result-card.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-color);
+        }
+        
+        .result-card.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error-color);
+        }
+
+        .levels-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .level-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .level-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .level-range {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+
+        .btn-test {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-test:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Cores específicas para cada nível */
+        .level-card.ferro { border-left: 5px solid #94a3b8; }
+        .level-card.bronze { border-left: 5px solid #cd7f32; }
+        .level-card.prata { border-left: 5px solid #c0c0c0; }
+        .level-card.ouro { border-left: 5px solid #ffd700; }
+        .level-card.platina { border-left: 5px solid #e5e4e2; }
+        .level-card.ascendente { border-left: 5px solid #ff6b6b; }
+        .level-card.imortal { border-left: 5px solid #9b59b6; }
+        .level-card.radiante { border-left: 5px solid #f39c12; }
+
+        .history-item {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-time {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            margin-left: 0.5rem;
+        }
+
+        .rank-ferro { background: #94a3b8; }
+        .rank-bronze { background: #cd7f32; }
+        .rank-prata { background: #c0c0c0; color: #333; }
+        .rank-ouro { background: #ffd700; color: #333; }
+        .rank-platina { background: #e5e4e2; color: #333; }
+        .rank-ascendente { background: #ff6b6b; }
+        .rank-imortal { background: #9b59b6; }
+        .rank-radiante { background: #f39c12; }
+    </style>
+
+    <script src="../js/modules.js"></script>
+    <script>
+        document.getElementById('xpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('heroName').value;
+            const xp = document.getElementById('heroXP').value;
+            
+            if (!nome || !xp) {
+                showXPResult('Por favor, preencha todos os campos.', false);
+                return;
+            }
+
+            const resultado = window.desafioFelipao.executarModuloRankXP(nome, xp);
+            
+            if (resultado.sucesso) {
+                const dados = resultado.resultado;
+                const resultadoHtml = `
+                    <div style="text-align: center;">
+                        <h3>🏆 Herói Classificado!</h3>
+                        <div class="rank-result">
+                            <h4>📊 ${dados.nome}</h4>
+                            <p><strong>XP:</strong> ${dados.xp.toLocaleString()} pontos</p>
+                            <p><strong>Nível:</strong> <span class="rank-badge rank-${dados.nivel.toLowerCase()}">${dados.nivel}</span></p>
+                            <div class="progress-info">
+                                ${getProgressInfo(dados.xp, dados.nivel)}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                showXPResult(resultadoHtml, true);
+                updateXPHistory();
+            } else {
+                showXPResult(`Erro: ${resultado.erro}`, false);
+            }
+        });
+
+        function getProgressInfo(xp, nivel) {
+            const niveis = {
+                'Ferro': { min: 0, max: 1000 },
+                'Bronze': { min: 1001, max: 2000 },
+                'Prata': { min: 2001, max: 5000 },
+                'Ouro': { min: 5001, max: 7000 },
+                'Platina': { min: 7001, max: 8000 },
+                'Ascendente': { min: 8001, max: 9000 },
+                'Imortal': { min: 9001, max: 10000 },
+                'Radiante': { min: 10001, max: 999999 }
+            };
+
+            const nivelAtual = niveis[nivel];
+            if (!nivelAtual) return '';
+
+            if (nivel === 'Radiante') {
+                return `<p style="color: var(--success-color);">🌟 Nível máximo alcançado!</p>`;
+            }
+
+            const progresso = ((xp - nivelAtual.min) / (nivelAtual.max - nivelAtual.min)) * 100;
+            const proximoNivel = Object.keys(niveis)[Object.keys(niveis).indexOf(nivel) + 1];
+            const xpParaProximo = nivelAtual.max + 1 - xp;
+
+            return `
+                <div style="margin-top: 1rem;">
+                    <div style="background: var(--gray-300); border-radius: 10px; height: 10px; overflow: hidden;">
+                        <div style="background: var(--primary-color); height: 100%; width: ${progresso}%; transition: width 0.3s ease;"></div>
+                    </div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                        ${xpParaProximo > 0 ? `Faltam ${xpParaProximo} XP para ${proximoNivel}` : ''}
+                    </p>
+                </div>
+            `;
+        }
+
+        function showXPResult(content, success) {
+            const resultDiv = document.getElementById('xpResult');
+            const resultContent = document.getElementById('xpResultContent');
+            
+            resultContent.innerHTML = content;
+            resultDiv.className = `result-card ${success ? 'success' : 'error'}`;
+            resultDiv.style.display = 'block';
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function clearXPForm() {
+            document.getElementById('xpForm').reset();
+            document.getElementById('xpResult').style.display = 'none';
+        }
+
+        function testLevel(xp) {
+            document.getElementById('heroName').value = 'Herói Teste';
+            document.getElementById('heroXP').value = xp;
+            document.getElementById('xpForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateXPHistory() {
+            const historico = window.desafioFelipao.obterHistorico().filter(item => item.modulo === 'rank-xp');
+            const historyContainer = document.getElementById('xpHistory');
+            
+            if (historico.length === 0) {
+                historyContainer.innerHTML = '<p style="text-align: center; color: var(--gray-600);">Nenhum ranking calculado ainda.</p>';
+                return;
+            }
+
+            historyContainer.innerHTML = historico.map(item => `
+                <div class="history-item">
+                    <div class="history-header">
+                        <strong>📊 ${item.dados.nome}</strong>
+                        <span class="history-time">${item.dados.timestamp}</span>
+                    </div>
+                    <p>
+                        <strong>XP:</strong> ${item.dados.xp.toLocaleString()} | 
+                        <strong>Nível:</strong> <span class="rank-badge rank-${item.dados.nivel.toLowerCase()}">${item.dados.nivel}</span>
+                    </p>
+                </div>
+            `).join('');
+        }
+
+        function clearHistory(modulo) {
+            if (confirm('Tem certeza que deseja limpar o histórico?')) {
+                window.desafioFelipao.limparHistorico();
+                updateXPHistory();
+                showXPResult('Histórico limpo com sucesso!', true);
+            }
+        }
+
+        // Carregar histórico ao inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            updateXPHistory();
+        });
+
+        // CSS adicional para rank-result
+        const additionalCSS = `
+            .rank-result {
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+                padding: 2rem;
+                border-radius: 12px;
+                margin: 1rem 0;
+            }
+            
+            .rank-result h4 {
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
+            
+            .rank-result p {
+                margin-bottom: 0.5rem;
+                font-size: 1.1rem;
+            }
+
+            .progress-info {
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(255,255,255,0.3);
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalCSS;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>

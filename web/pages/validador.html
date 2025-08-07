@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💳 Validador de Bandeiras - Desafio Felipão</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .validator-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .validator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .result-card {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .result-card.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-color);
+        }
+        
+        .result-card.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error-color);
+        }
+        
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .brand-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .brand-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .test-numbers {
+            margin-top: 1rem;
+        }
+        
+        .test-number {
+            background: var(--gray-200);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .test-number:hover {
+            background: var(--gray-300);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="../index.html" style="color: white; text-decoration: none;">
+                    🎮 Desafio Felipão
+                </a>
+            </h1>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="#validator" class="nav-link active">Validador</a>
+                <a href="#brands" class="nav-link">Bandeiras</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="validator" class="validator-container">
+            <div class="validator-card">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">
+                    💳 Validador de Bandeiras de Cartão
+                </h2>
+                
+                <div class="input-group">
+                    <label for="cardNumber">
+                        <i class="fas fa-credit-card"></i>
+                        Número do Cartão
+                    </label>
+                    <input 
+                        type="text" 
+                        id="cardNumber" 
+                        placeholder="Digite o número do cartão (pode conter espaços ou hífens)"
+                        maxlength="25"
+                    >
+                    <small style="color: var(--gray-600); font-size: 0.9rem;">
+                        ⚠️ Use apenas números de teste! Nunca insira dados reais.
+                    </small>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" onclick="validateCard()">
+                        <i class="fas fa-check-circle"></i>
+                        Validar Cartão
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearForm()">
+                        <i class="fas fa-trash"></i>
+                        Limpar
+                    </button>
+                </div>
+                
+                <div id="result" class="result-card">
+                    <div id="resultContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="brands" class="validator-container">
+            <h3 style="text-align: center; color: var(--gray-900); margin-bottom: 2rem;">
+                🏦 Bandeiras Suportadas
+            </h3>
+            
+            <div class="brands-grid">
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>Visa</h4>
+                    <p>Prefixo: 4</p>
+                    <p>Tamanho: 13, 16, 19</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('4111111111111111')">
+                            4111111111111111
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>Mastercard</h4>
+                    <p>Prefixo: 51-55</p>
+                    <p>Tamanho: 16</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('5555555555554444')">
+                            5555555555554444
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>American Express</h4>
+                    <p>Prefixo: 34, 37</p>
+                    <p>Tamanho: 15</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('378282246310005')">
+                            378282246310005
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>Diners Club</h4>
+                    <p>Prefixo: 300-305, 36, 38</p>
+                    <p>Tamanho: 14</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('30569309025904')">
+                            30569309025904
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>Discover</h4>
+                    <p>Prefixo: 6011, 622126-622925</p>
+                    <p>Tamanho: 16, 19</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('6011111111111117')">
+                            6011111111111117
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>JCB</h4>
+                    <p>Prefixo: 3528-3589</p>
+                    <p>Tamanho: 16</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('3530111333300000')">
+                            3530111333300000
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>Elo</h4>
+                    <p>Prefixo: Múltiplos</p>
+                    <p>Tamanho: 16</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('4011785978345612')">
+                            4011785978345612
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>Hipercard</h4>
+                    <p>Prefixo: 606282</p>
+                    <p>Tamanho: 13, 16, 19</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('6062825624254001')">
+                            6062825624254001
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>Aura</h4>
+                    <p>Prefixo: 507860</p>
+                    <p>Tamanho: 16</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('5078601800000000')">
+                            5078601800000000
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>enRoute</h4>
+                    <p>Prefixo: 2014, 2149</p>
+                    <p>Tamanho: 15</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('201400000000009')">
+                            201400000000009
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="brand-card">
+                    <div class="brand-icon">💳</div>
+                    <h4>Voyager</h4>
+                    <p>Prefixo: 8699</p>
+                    <p>Tamanho: 15</p>
+                    <div class="test-numbers">
+                        <div class="test-number" onclick="useTestNumber('869940697287073')">
+                            869940697287073
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--warning-color); color: white; border-radius: 8px;">
+                <h4>⚠️ Aviso Importante</h4>
+                <p>Estes são números de teste apenas para demonstração. Nunca use números de cartão reais!</p>
+                <p>Para usar o validador completo com todas as funcionalidades, execute:</p>
+                <code style="background: rgba(0,0,0,0.2); padding: 0.5rem; border-radius: 4px;">npm run validador</code>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Implementação JavaScript do validador (versão simplificada)
+        
+        const bandeiras = {
+            visa: {
+                nome: 'Visa',
+                regex: /^4[0-9]{12}(?:[0-9]{3})?(?:[0-9]{3})?$/,
+                tamanhos: [13, 16, 19]
+            },
+            mastercard: {
+                nome: 'Mastercard',
+                regex: /^5[1-5][0-9]{14}$/,
+                tamanhos: [16]
+            },
+            amex: {
+                nome: 'American Express',
+                regex: /^3[47][0-9]{13}$/,
+                tamanhos: [15]
+            },
+            dinersclub: {
+                nome: 'Diners Club',
+                regex: /^3[0-5][0-9]{12}$|^36[0-9]{12}$|^38[0-9]{12}$/,
+                tamanhos: [14]
+            },
+            discover: {
+                nome: 'Discover',
+                regex: /^6(?:011|5[0-9]{2}|4[4-9][0-9]|22[1-9][0-9])[0-9]{12}$/,
+                tamanhos: [16, 19]
+            },
+            jcb: {
+                nome: 'JCB',
+                regex: /^(?:2131|1800|35\d{3})\d{11}$/,
+                tamanhos: [16]
+            },
+            elo: {
+                nome: 'Elo',
+                regex: /^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/,
+                tamanhos: [16]
+            },
+            hipercard: {
+                nome: 'Hipercard',
+                regex: /^(606282\d{10}(\d{3})?)|(3841\d{15})$/,
+                tamanhos: [13, 16, 19]
+            },
+            aura: {
+                nome: 'Aura',
+                regex: /^507860[0-9]{10}$/,
+                tamanhos: [16]
+            },
+            enroute: {
+                nome: 'enRoute',
+                regex: /^(2014|2149)[0-9]{11}$/,
+                tamanhos: [15]
+            },
+            voyager: {
+                nome: 'Voyager',
+                regex: /^8699[0-9]{11}$/,
+                tamanhos: [15]
+            }
+        };
+
+        function limparNumero(numero) {
+            return numero.replace(/\D/g, '');
+        }
+
+        function validarLuhn(numero) {
+            const numeroLimpo = limparNumero(numero);
+            let soma = 0;
+            let alternar = false;
+
+            for (let i = numeroLimpo.length - 1; i >= 0; i--) {
+                let digito = parseInt(numeroLimpo.charAt(i));
+
+                if (alternar) {
+                    digito *= 2;
+                    if (digito > 9) {
+                        digito = (digito % 10) + 1;
+                    }
+                }
+
+                soma += digito;
+                alternar = !alternar;
+            }
+
+            return (soma % 10) === 0;
+        }
+
+        function identificarBandeira(numero) {
+            const numeroLimpo = limparNumero(numero);
+
+            for (const [chave, bandeira] of Object.entries(bandeiras)) {
+                if (!bandeira.tamanhos.includes(numeroLimpo.length)) {
+                    continue;
+                }
+
+                if (bandeira.regex.test(numeroLimpo)) {
+                    return bandeira;
+                }
+            }
+
+            return null;
+        }
+
+        function mascararNumero(numero) {
+            const numeroLimpo = limparNumero(numero);
+            if (numeroLimpo.length < 4) return numeroLimpo;
+            
+            const primeiros4 = numeroLimpo.slice(0, 4);
+            const ultimos4 = numeroLimpo.slice(-4);
+            const meio = '*'.repeat(numeroLimpo.length - 8);
+            
+            return `${primeiros4}${meio}${ultimos4}`;
+        }
+
+        function validateCard() {
+            const input = document.getElementById('cardNumber');
+            const numero = input.value.trim();
+            
+            if (!numero) {
+                showResult('Por favor, digite um número de cartão.', false);
+                return;
+            }
+
+            const numeroLimpo = limparNumero(numero);
+            
+            if (numeroLimpo.length < 13 || numeroLimpo.length > 19) {
+                showResult('Número de cartão deve ter entre 13 e 19 dígitos.', false);
+                return;
+            }
+
+            const luhnValido = validarLuhn(numeroLimpo);
+            const bandeira = identificarBandeira(numeroLimpo);
+
+            const valido = luhnValido && bandeira !== null;
+
+            let resultado = `
+                <div style="text-align: center;">
+                    <h3>${valido ? '✅ Cartão Válido' : '❌ Cartão Inválido'}</h3>
+                    <div style="margin: 1rem 0;">
+                        <strong>Número:</strong> ${mascararNumero(numeroLimpo)}<br>
+                        <strong>Bandeira:</strong> ${bandeira ? bandeira.nome : 'Desconhecida'}<br>
+                        <strong>Algoritmo de Luhn:</strong> ${luhnValido ? 'Válido' : 'Inválido'}
+                    </div>
+                </div>
+            `;
+
+            if (!valido) {
+                if (!luhnValido) {
+                    resultado += '<p><strong>Motivo:</strong> Falha na validação do algoritmo de Luhn.</p>';
+                } else if (!bandeira) {
+                    resultado += '<p><strong>Motivo:</strong> Bandeira não reconhecida.</p>';
+                }
+            }
+
+            showResult(resultado, valido);
+        }
+
+        function showResult(content, success) {
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultContent.innerHTML = content;
+            resultDiv.className = `result-card ${success ? 'success' : 'error'}`;
+            resultDiv.style.display = 'block';
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function clearForm() {
+            document.getElementById('cardNumber').value = '';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function useTestNumber(number) {
+            document.getElementById('cardNumber').value = number;
+            document.getElementById('cardNumber').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Formatação automática do input
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            let formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+            if (formattedValue.length > 25) {
+                formattedValue = formattedValue.substring(0, 25);
+            }
+            e.target.value = formattedValue;
+        });
+
+        // Validar ao pressionar Enter
+        document.getElementById('cardNumber').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                validateCard();
+            }
+        });
+    </script>
+</body>
+</html>

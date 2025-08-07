@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Ranking por Partidas - Desafio Felipão</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <a href="../index.html" style="color: white; text-decoration: none;">
+                    🎮 Desafio Felipão
+                </a>
+            </h1>
+            <nav class="nav">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="#ranking" class="nav-link active">Classificar</a>
+                <a href="#niveis" class="nav-link">Níveis</a>
+                <a href="#historico" class="nav-link">Histórico</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="ranking" class="validator-container">
+            <div class="validator-card">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">
+                    🏆 Sistema de Ranking por Partidas
+                </h2>
+                
+                <form id="partidasForm">
+                    <div class="input-group">
+                        <label for="heroName">
+                            <i class="fas fa-user"></i>
+                            Nome do Herói
+                        </label>
+                        <input 
+                            type="text" 
+                            id="heroName" 
+                            placeholder="Digite o nome do herói"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="vitorias">
+                                <i class="fas fa-trophy"></i>
+                                Vitórias
+                            </label>
+                            <input 
+                                type="number" 
+                                id="vitorias" 
+                                placeholder="Número de vitórias"
+                                min="0" 
+                                max="9999"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="derrotas">
+                                <i class="fas fa-times-circle"></i>
+                                Derrotas
+                            </label>
+                            <input 
+                                type="number" 
+                                id="derrotas" 
+                                placeholder="Número de derrotas"
+                                min="0" 
+                                max="9999"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <small style="color: var(--gray-600); font-size: 0.9rem;">
+                            💡 Dica: Teste combinações como V:15/D:5, V:45/D:10, V:75/D:15, V:95/D:5
+                        </small>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-calculator"></i>
+                            Calcular Ranking
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="clearPartidasForm()">
+                            <i class="fas fa-trash"></i>
+                            Limpar
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="partidasResult" class="result-card">
+                    <div id="partidasResultContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="niveis" class="validator-container">
+            <h3 style="text-align: center; color: var(--gray-900); margin-bottom: 2rem;">
+                🥇 Níveis de Classificação por Vitórias
+            </h3>
+            
+            <div class="levels-container">
+                <div class="level-card ferro">
+                    <div class="level-icon">⚡</div>
+                    <h4>Ferro</h4>
+                    <p class="level-range">Menos de 10 vitórias</p>
+                    <p>Iniciante em batalhas</p>
+                    <button onclick="testPartidas(8, 3)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card bronze">
+                    <div class="level-icon">🥉</div>
+                    <h4>Bronze</h4>
+                    <p class="level-range">11 - 20 vitórias</p>
+                    <p>Aprendendo a lutar</p>
+                    <button onclick="testPartidas(15, 8)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card prata">
+                    <div class="level-icon">🥈</div>
+                    <h4>Prata</h4>
+                    <p class="level-range">21 - 50 vitórias</p>
+                    <p>Guerreiro competente</p>
+                    <button onclick="testPartidas(35, 15)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card ouro">
+                    <div class="level-icon">🥇</div>
+                    <h4>Ouro</h4>
+                    <p class="level-range">51 - 80 vitórias</p>
+                    <p>Lutador experiente</p>
+                    <button onclick="testPartidas(65, 20)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card diamante">
+                    <div class="level-icon">💎</div>
+                    <h4>Diamante</h4>
+                    <p class="level-range">81 - 90 vitórias</p>
+                    <p>Guerreiro elite</p>
+                    <button onclick="testPartidas(85, 15)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card lendario">
+                    <div class="level-icon">🌟</div>
+                    <h4>Lendário</h4>
+                    <p class="level-range">91 - 100 vitórias</p>
+                    <p>Herói de lendas</p>
+                    <button onclick="testPartidas(95, 10)" class="btn-test">Testar</button>
+                </div>
+                
+                <div class="level-card imortal">
+                    <div class="level-icon">✨</div>
+                    <h4>Imortal</h4>
+                    <p class="level-range">101+ vitórias</p>
+                    <p>Invencível em batalha</p>
+                    <button onclick="testPartidas(150, 25)" class="btn-test">Testar</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="historico" class="validator-container">
+            <div class="validator-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h3>📋 Histórico de Rankings por Partidas</h3>
+                    <button class="btn btn-outline" onclick="clearHistory('rank-partidas')">
+                        <i class="fas fa-trash"></i>
+                        Limpar Histórico
+                    </button>
+                </div>
+                
+                <div id="partidasHistory" class="history-container">
+                    <!-- Histórico será inserido aqui -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .validator-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .validator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .input-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .result-card {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .result-card.success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-color);
+        }
+        
+        .result-card.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid var(--error-color);
+        }
+
+        .levels-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .level-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .level-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .level-range {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+
+        .btn-test {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-test:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Cores específicas para cada nível */
+        .level-card.ferro { border-left: 5px solid #94a3b8; }
+        .level-card.bronze { border-left: 5px solid #cd7f32; }
+        .level-card.prata { border-left: 5px solid #c0c0c0; }
+        .level-card.ouro { border-left: 5px solid #ffd700; }
+        .level-card.diamante { border-left: 5px solid #b9f2ff; }
+        .level-card.lendario { border-left: 5px solid #ff6b6b; }
+        .level-card.imortal { border-left: 5px solid #9b59b6; }
+
+        .history-item {
+            background: var(--gray-100);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-time {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            margin-left: 0.5rem;
+        }
+
+        .rank-ferro { background: #94a3b8; }
+        .rank-bronze { background: #cd7f32; }
+        .rank-prata { background: #c0c0c0; color: #333; }
+        .rank-ouro { background: #ffd700; color: #333; }
+        .rank-diamante { background: #b9f2ff; color: #333; }
+        .rank-lendário { background: #ff6b6b; }
+        .rank-imortal { background: #9b59b6; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .saldo-positivo { color: var(--success-color); }
+        .saldo-negativo { color: var(--error-color); }
+        .saldo-neutro { color: var(--gray-600); }
+    </style>
+
+    <script src="../js/modules.js"></script>
+    <script>
+        document.getElementById('partidasForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('heroName').value;
+            const vitorias = document.getElementById('vitorias').value;
+            const derrotas = document.getElementById('derrotas').value;
+            
+            if (!nome || !vitorias || !derrotas) {
+                showPartidasResult('Por favor, preencha todos os campos.', false);
+                return;
+            }
+
+            const resultado = window.desafioFelipao.executarModuloRankPartidas(nome, vitorias, derrotas);
+            
+            if (resultado.sucesso) {
+                const dados = resultado.resultado;
+                const winRate = ((dados.vitorias / (dados.vitorias + dados.derrotas)) * 100).toFixed(1);
+                const saldoClass = dados.saldo > 0 ? 'saldo-positivo' : dados.saldo < 0 ? 'saldo-negativo' : 'saldo-neutro';
+                
+                const resultadoHtml = `
+                    <div style="text-align: center;">
+                        <h3>🏆 Ranking Calculado!</h3>
+                        <div class="rank-result">
+                            <h4>🥇 ${dados.nome}</h4>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-number" style="color: var(--success-color);">${dados.vitorias}</span>
+                                    <span class="stat-label">Vitórias</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" style="color: var(--error-color);">${dados.derrotas}</span>
+                                    <span class="stat-label">Derrotas</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number ${saldoClass}">${dados.saldo >= 0 ? '+' : ''}${dados.saldo}</span>
+                                    <span class="stat-label">Saldo</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">${winRate}%</span>
+                                    <span class="stat-label">Taxa de Vitória</span>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 1.2rem;">
+                                <strong>Nível:</strong> <span class="rank-badge rank-${dados.nivel.toLowerCase()}">${dados.nivel}</span>
+                            </p>
+                            ${getNextLevelInfo(dados.vitorias, dados.nivel)}
+                        </div>
+                    </div>
+                `;
+                showPartidasResult(resultadoHtml, true);
+                updatePartidasHistory();
+            } else {
+                showPartidasResult(`Erro: ${resultado.erro}`, false);
+            }
+        });
+
+        function getNextLevelInfo(vitorias, nivelAtual) {
+            const niveis = [
+                { nome: 'Ferro', min: 0, max: 9 },
+                { nome: 'Bronze', min: 11, max: 20 },
+                { nome: 'Prata', min: 21, max: 50 },
+                { nome: 'Ouro', min: 51, max: 80 },
+                { nome: 'Diamante', min: 81, max: 90 },
+                { nome: 'Lendário', min: 91, max: 100 },
+                { nome: 'Imortal', min: 101, max: 9999 }
+            ];
+
+            const nivelIndex = niveis.findIndex(n => n.nome === nivelAtual);
+            
+            if (nivelIndex === -1 || nivelIndex === niveis.length - 1) {
+                return '<p style="color: var(--success-color); margin-top: 1rem;">🌟 Nível máximo alcançado!</p>';
+            }
+
+            const proximoNivel = niveis[nivelIndex + 1];
+            const vitoriasNecessarias = proximoNivel.min - vitorias;
+
+            if (vitoriasNecessarias > 0) {
+                return `
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.3);">
+                        <p style="font-size: 0.9rem;">
+                            🎯 Faltam <strong>${vitoriasNecessarias}</strong> vitórias para alcançar <strong>${proximoNivel.nome}</strong>
+                        </p>
+                    </div>
+                `;
+            }
+
+            return '';
+        }
+
+        function showPartidasResult(content, success) {
+            const resultDiv = document.getElementById('partidasResult');
+            const resultContent = document.getElementById('partidasResultContent');
+            
+            resultContent.innerHTML = content;
+            resultDiv.className = `result-card ${success ? 'success' : 'error'}`;
+            resultDiv.style.display = 'block';
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function clearPartidasForm() {
+            document.getElementById('partidasForm').reset();
+            document.getElementById('partidasResult').style.display = 'none';
+        }
+
+        function testPartidas(vitorias, derrotas) {
+            document.getElementById('heroName').value = 'Guerreiro Teste';
+            document.getElementById('vitorias').value = vitorias;
+            document.getElementById('derrotas').value = derrotas;
+            document.getElementById('partidasForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updatePartidasHistory() {
+            const historico = window.desafioFelipao.obterHistorico().filter(item => item.modulo === 'rank-partidas');
+            const historyContainer = document.getElementById('partidasHistory');
+            
+            if (historico.length === 0) {
+                historyContainer.innerHTML = '<p style="text-align: center; color: var(--gray-600);">Nenhum ranking calculado ainda.</p>';
+                return;
+            }
+
+            historyContainer.innerHTML = historico.map(item => {
+                const winRate = ((item.dados.vitorias / (item.dados.vitorias + item.dados.derrotas)) * 100).toFixed(1);
+                const saldoClass = item.dados.saldo > 0 ? 'saldo-positivo' : item.dados.saldo < 0 ? 'saldo-negativo' : 'saldo-neutro';
+                
+                return `
+                    <div class="history-item">
+                        <div class="history-header">
+                            <strong>🏆 ${item.dados.nome}</strong>
+                            <span class="history-time">${item.dados.timestamp}</span>
+                        </div>
+                        <p>
+                            <strong>V:</strong> ${item.dados.vitorias} | 
+                            <strong>D:</strong> ${item.dados.derrotas} | 
+                            <strong>Saldo:</strong> <span class="${saldoClass}">${item.dados.saldo >= 0 ? '+' : ''}${item.dados.saldo}</span> | 
+                            <strong>WR:</strong> ${winRate}%
+                        </p>
+                        <p>
+                            <strong>Nível:</strong> <span class="rank-badge rank-${item.dados.nivel.toLowerCase()}">${item.dados.nivel}</span>
+                        </p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function clearHistory(modulo) {
+            if (confirm('Tem certeza que deseja limpar o histórico?')) {
+                window.desafioFelipao.limparHistorico();
+                updatePartidasHistory();
+                showPartidasResult('Histórico limpo com sucesso!', true);
+            }
+        }
+
+        // Carregar histórico ao inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePartidasHistory();
+        });
+
+        // CSS adicional para rank-result
+        const additionalCSS = `
+            .rank-result {
+                background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+                color: white;
+                padding: 2rem;
+                border-radius: 12px;
+                margin: 1rem 0;
+            }
+            
+            .rank-result h4 {
+                margin-bottom: 1rem;
+                font-size: 1.5rem;
+            }
+        `;
+
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalCSS;
+        document.head.appendChild(styleSheet);
+    </script>
+</body>
+</html>

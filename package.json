@@ -1,14 +1,33 @@
 {
   "name": "desafio-felipao",
   "version": "1.0.0",
-  "description": "",
+  "description": "Coleção de sistemas interativos: Heróis, Rankings, Validador de Cartões. Demonstra OOP, algoritmos e validação de dados em Node.js.",
   "type": "module",
-  "main": "index.js",
+  "main": "start.js",
   "scripts": {
+    "start": "node start.js",
+    "web": "node servidor-web.js",
+    "dev": "npm run web",
+    "heroi": "node Escolhendo_Heroi.js",
+    "rank-xp": "node Rank_Por_XP.js",
+    "rank-partidas": "node Rank_Por_Partidas.js",
+    "sistema-completo": "node SistemaRank_Por_escolha.js",
+    "validador": "node ValidadorBandeiras.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "javascript",
+    "nodejs",
+    "herois",
+    "ranking", 
+    "validador",
+    "cartao",
+    "algoritmo-luhn",
+    "oop",
+    "interactive",
+    "educational"
+  ],
+  "author": "Neemiasbragadev",
   "license": "ISC",
   "dependencies": {
     "readline-sync": "^1.4.10"
